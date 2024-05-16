@@ -25,11 +25,11 @@
                 <div class="max-h-[500px] w-full">
                     <textarea type="text"
                         class="w-full h-40 px-8 py-2 rounded-md outline-none bg-transparent text-text placeholder-text placeholder-opacity-40 overflow-y"
-                        placeholder="How's your day?"></textarea>
+                        placeholder="How's your day?" id="textarea-input"></textarea>
                 </div>
 
-                <container class="hidden w-full h-[200px] px-4" id="upload-container">
-                    
+                <container class="hidden w-full h-[400px] px-4 overflow-hidden" id="upload-container">
+
                 </container>
 
 
@@ -47,7 +47,7 @@
                             <input type="file" id="myfile" name="myfile" class="hidden" onchange="previewImage(event)">
                         </label>
                     </div>
-                    <button
+                    <button id="create-post-button"
                         class="cursor-pointer bg-accent hover:bg-orange-600 duration-200 transition-all py-2 text-sm px-8 text-text rounded-md">Create
                         Post</button>
                 </div>
@@ -59,7 +59,7 @@
 
 <script src="../dist/packages/jquery.js"></script>
 <script src="../dist/packages/toastr/main.js"></script>
-<script src="../dist/components/post/upload.js"></script>
 <script src="../dist/components/post/modal.js"></script>
+<script src="../dist/components/post/upload.js"></script>
 
 </html>
