@@ -21,7 +21,7 @@
         </div>
         `
 
-        container.insertAdjacentHTML("afterbegin", typer = 0 ? receptormsg : sendermsg);
+        container.insertAdjacentHTML("afterbegin", typer == 1 ? receptormsg : sendermsg);
     }
 
     if (urlParams.get('u')) {
@@ -44,8 +44,8 @@
                         actid: 2,
                         msg: msgInput.value
                     }))
-                    msgInput.value = "Enter meciaj"
                     renderMessage(msgInput.value, 0, document.getElementById('message-container'));
+                    msgInput.value = ""
                 })
 
                 interval = setInterval(() => {
@@ -58,8 +58,7 @@
             };
 
             ws.onmessage = function (evt) {
-                console.log("mesaj")
-                renderMessage(evt.data.msg, 1, document.getElementById('message-container'));
+                renderMessage(JSON.parse(evt.data).msg, 1, document.getElementById('message-container'));
             };
 
             ws.onclose = function () {

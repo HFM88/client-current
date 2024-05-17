@@ -22,11 +22,11 @@
                         <div class="w-full h-[0.5px] bg-text bg-opacity-40 mt-4"></div>
                     </div>
                 </div>
-         <!-- This acts as the border -->
+                <!-- This acts as the border -->
             </div>
         </div>
 
-        <div class="flex justify-center w-full mt-10 text-text">
+        <div class="flex justify-center w-full mt-10 text-text ">
             <div class="flex flex-col basis-full md:basis-2/3 lg:basis-1/2 justify-center space-y-10 px-10">
                 <div class="flex flex-col space-y-2 bg-gray p-2 px-4 rounded-md">
                     <div class="flex space-x-4 items-center justify-between">
@@ -36,20 +36,24 @@
                                     class="object-cover w-full h-full" id="user-profile-pic">
                             </div>
                         </a>
-                        
-                        <input class="w-full h-full outline-none bg-gray items-center placeholder-text placeholder-opacity-40" placeholder="What are you up to?">
+
+                        <input
+                            class="w-full h-full outline-none bg-gray items-center placeholder-text placeholder-opacity-40"
+                            placeholder="What are you up to?">
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="flex justify-center w-full mt-10 mb-24 text-text">
-            <div class="flex flex-col basis-full md:basis-2/3 lg:basis-1/2 justify-center space-y-10 px-10" id="posts-container">
-                
+            <div class="flex flex-col basis-full md:basis-2/3 lg:basis-1/2 justify-center space-y-10 px-10"
+                id="posts-container">
+
             </div>
         </div>
 
-
+        <script src="https://unpkg.com/taos@1.0.5/dist/taos.js"></script>
         <script src="../dist/components/home/renderposts.js"></script>
 </body>
+
 </html>
