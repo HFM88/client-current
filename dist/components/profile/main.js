@@ -49,8 +49,31 @@ fetch(
       secondaryButton.setAttribute('href', '/notifications')
 
       primaryButton.innerText = "Change display name"
-      document.getElementById('edit-profile-pic').addEventListener('click' , function(){
-        
+      document.getElementById('edit-profile-pic').addEventListener('click', function () {
+        // Create an input element of type file
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = '.png'; // Accept only PNG files
+
+        // Simulate a click event to open the file dialog
+        input.click();
+
+        // Event listener to handle file selection
+        input.addEventListener('change', async function (event) {
+          const file = event.target.files[0];
+          if (file) {
+            // Get the filename of the selected file
+            let fileName = file.name
+
+            let reader = new FileReader();
+            reader.onload = function () {
+              reader.readAsDataURL(fileName);
+              console.log(reader.result)
+              userProfilePic.attributes.src = reader.result;
+            }
+
+          }
+        });
       })
     } else {
       document.getElementById('edit-profile-pic').remove();
