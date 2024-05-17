@@ -6,38 +6,38 @@ const repassword_input = document.getElementById('repassword-input-signup');
 const signup_button = document.getElementById('signup-button');
 
 const validateEmail = (email) => {
-return String(email)
-    .toLowerCase()
-    .match(
-    /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-    );
+    return String(email)
+        .toLowerCase()
+        .match(
+            /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        );
 };
 
-signup_button.addEventListener('click' , async function(e){
+signup_button.addEventListener('click', async function (e) {
 
     e.preventDefault();
 
 
-    if(!validateEmail(email_input.value)){
+    if (!validateEmail(email_input.value)) {
         toastr.error("Invalid email");
         return;
     }
 
-    if(password_input.value != repassword_input.value){
+    if (password_input.value != repassword_input.value) {
         toastr.error("Passwords don't match");
         return;
     }
 
-    try{
+    try {
         const response = await fetch('http://localhost:5000/api/user/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify({
-                'email' : email_input.value,
-                'username' : username_input.value,
-                'password' : password_input.value
+                'email': email_input.value,
+                'username': username_input.value,
+                'password': password_input.value
             }),
             credentials: 'include', // Include cookies in the request
         });
@@ -47,15 +47,15 @@ signup_button.addEventListener('click' , async function(e){
             return;
         }
 
-        toastr.success("Account successfully created , redirecting in 3 seconds...");    
+        toastr.success("Account successfully created , redirecting in 3 seconds...");
 
         setTimeout(() => {
-            window.location.href = "/acasa"
+            window.location.href = "/home"
         }, 3000);
-    }catch(ex){
+    } catch (ex) {
         toastr.error(ex.message);
     }
-    
+
 })
 
 toastr.options = {
@@ -74,4 +74,4 @@ toastr.options = {
     "hideEasing": "linear",
     "showMethod": "fadeIn",
     "hideMethod": "fadeOut"
-  }
+}

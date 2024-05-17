@@ -19,6 +19,9 @@ acasa.init = function (app, collection) {
   acasa.router.get("/auth", (req, res) => {
     res.render("auth.ejs");
   });
+  acasa.router.get("/messages", (req, res) => {
+    res.render("messages.ejs");
+  });
   acasa.router.get("/search", (req, res) => {
     res.render("search.ejs");
   });

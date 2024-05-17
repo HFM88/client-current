@@ -10,38 +10,46 @@ document.addEventListener("DOMContentLoaded", async function () {
     if (r.ok) {
         let friends = await r.json();
         for (const friend of friends) {
-            r = await fetch('http://localhost:5000/api/posts/get/'+friend.username)
-            if(r.ok) {
-                for(const p)
+            r = await fetch('http://localhost:5000/api/posts/get/' + friend.username)
+            if (r.ok) {
+                let posts = await r.json();
+                for (const p of posts) {
+                    allPosts.push({ ...p, ...friend });
+                }
             }
         }
     }
+
+    console.log(allPosts)
+
+    renderNextPage();
 
 
     function renderPosts(startIndex, endIndex) {
         const postsHTML = allPosts.slice(startIndex, endIndex).map(postObject => {
             const {
                 username,
-                profilePic,
+                profilepic,
                 timestamp,
                 content,
-                image,
+                filename,
                 likes,
-                comments
+                comments,
+                date
             } = postObject;
 
             return `
                 <div class="flex flex-col space-y-2 pb-4 bg-gray p-4 rounded-md">
                 <div class="flex items-center space-x-4 justify-start">
-                    <a class="py-2 flex justify-center items-center" href="/profile" id="user-profile">
+                    <a class="py-2 flex justify-center items-center" href=${'/profile?n=' + username} id="user-profile">
                         <div class="w-12 h-12 overflow-hidden rounded-full">
-                            <img src="${profilePic}" alt="" class="object-cover w-full h-full" id="user-profile-pic">
+                            <img src="${profilepic ? 'http://localhost:5000/cdn/' + profilepic : 'http://localhost:5000/cdn/cat.png'}" alt="" class="object-cover w-full h-full" id="user-profile-pic">
                         </div>
                     </a>
 
                     <div class="flex items-start flex-col">
                         <p class="font-headings">${username}</p>
-                        <p class="text-sm text-text opacity-40">${timestamp}</p>
+                        <p class="text-sm text-text opacity-40">${new Date(date).toLocaleTimeString()}</p>
                     </div>
                 </div>
 
@@ -50,7 +58,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                 </div>
 
                 <container class="w-full h-auto max-h-[300px] overflow-hidden pt-4" id="upload-container">
-                    <img src="${image}" alt="" class="object-cover h-full w-full rounded-md" id="post-image">
+                    <img src="${"http://localhost:5000/cdn/" + filename + ".png"}" alt="" class="object-cover h-full w-full rounded-md" id="post-image">
                 </container>
 
                 <div class="flex w-full justify-between items-center py-2 select-none">
@@ -68,7 +76,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-7 h-7">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 0 1-.923 1.785A5.969 5.969 0 0 0 6 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337Z" />
                                 </svg>
-                                <p class="text-sm">${comments}</p>
+                                <p class="text-sm">${Math.floor(Math.random() + 1)}</p>
                             </span>
                         </div>
                     </div>

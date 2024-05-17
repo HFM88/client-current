@@ -14,6 +14,8 @@ app.use(cookie_parser());
 app.use(body_parser.urlencoded({ extended: false }))
 app.use(body_parser.json())
 
+
+
 // SETS
 app.set('view engine', 'ejs') 
 app.set('views', './views');

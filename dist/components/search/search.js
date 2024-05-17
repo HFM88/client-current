@@ -44,7 +44,10 @@ const addResult = (entryObject) => {
     })
     console.log(res);
     if (res.ok) {
-      toastr.success("all good")
+      toastr.success("Sent")
+      setTimeout(() => {
+        window.location.href = window.location.href;
+      }, 1000);
     } else {
       toastr.error("Erorr")
     }

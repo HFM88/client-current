@@ -26,7 +26,7 @@ login_button.addEventListener('click', async function (e) {
         toastr.success("Login successful, redirecting in 3 seconds...");
 
         setTimeout(() => {
-            window.location.href = "/acasa"; // Redirect to the dashboard or home page after login
+            window.location.href = "/home"; // Redirect to the dashboard or home page after login
         }, 3000);
     } catch (ex) {
         toastr.error(ex.message);

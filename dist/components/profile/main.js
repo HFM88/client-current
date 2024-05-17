@@ -47,7 +47,7 @@ fetch(
       userProfilePic.setAttribute('src', 'http://localhost:5000/cdn/' + data['profilepic'])
     }
 
-    if (data.feed) {
+    if (data.feed != "") {
       userBio.innerText = data.feed;
     }
     else {
