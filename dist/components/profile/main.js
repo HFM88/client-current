@@ -49,6 +49,7 @@ fetch(
       secondaryButton.setAttribute('href', '/notifications')
 
       primaryButton.innerText = "Change display name"
+
       document.getElementById('edit-profile-pic').addEventListener('click', function () {
         // Create an input element of type file
         const input = document.createElement('input');
@@ -59,17 +60,43 @@ fetch(
         input.click();
 
         // Event listener to handle file selection
-        input.addEventListener('change', async function (event) {
+        input.addEventListener('change', function (event) {
           const file = event.target.files[0];
           if (file) {
-            // Get the filename of the selected file
-            let fileName = file.name
 
             let reader = new FileReader();
-            reader.onload = function () {
-              reader.readAsDataURL(fileName);
-              console.log(reader.result)
-              userProfilePic.attributes.src = reader.result;
+            reader.readAsDataURL(file);
+            reader.onload = async function () {
+
+              let r = await fetch('http://localhost:5000/cdn/upload', {
+                method: 'POST',
+                body: JSON.stringify({
+                  imgdata: reader.result
+                }),
+                headers: { 'Content-Type': 'application/json' }
+              })
+
+              if (r.ok) r = await r.json(); else {
+                toastr.error("A aparut o eroare")
+                return;
+              }
+
+              let r_ = await fetch('http://localhost:5000/api/user/setpfp', {
+                method: 'POST',
+                body: JSON.stringify({
+                  value: r.filename + '.png'
+                }),
+                credentials: 'include',
+                headers: { 'Content-Type': 'application/json' }
+              })
+              if (r_.ok) {
+                toastr.success("Ti-ai schimbat poza de profil cu success")
+                setTimeout(() => {
+                  window.location.href = window.location.href;
+                }, 1000);
+              } else {
+                toastr.error("A aparut o eroare")
+              }
             }
 
           }
@@ -77,6 +104,9 @@ fetch(
       })
     } else {
       document.getElementById('edit-profile-pic').remove();
+      primaryButton.innerText = "Add Friend"
+      secondaryButton.innerText = "Message"
+      secondaryButton.setAttribute('href', "/messages?u=" + data.username);
     }
 
     if (data.profilepic == "") {
