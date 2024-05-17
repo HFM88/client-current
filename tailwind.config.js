@@ -23,5 +23,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("./tw-plugins/component-loader/index.js")],
+  plugins: [require("./tw-plugins/component-loader/index.js"), require("tailwind-scrollbar")],
 };
