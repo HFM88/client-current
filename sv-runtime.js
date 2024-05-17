@@ -1,7 +1,5 @@
 // PACKAGES
 const express = require('express')
-const cookie_parser = require('cookie-parser');
-const body_parser = require('body-parser');
 const fs = require('fs');
 const path = require('path');
 
@@ -10,11 +8,6 @@ const port = 3000
 
 // MIDDLEWARES
 app.use('/dist' , express.static('./dist'))
-app.use(cookie_parser());
-app.use(body_parser.urlencoded({ extended: false }))
-app.use(body_parser.json())
-
-
 
 // SETS
 app.set('view engine', 'ejs') 
