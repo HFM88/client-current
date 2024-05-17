@@ -68,3 +68,11 @@ O aplicatie de tip social media care ruleaza in browser
 2. ```sh
    npm run tw-render
    ```
+
+### Run the server
+1. ```sh
+   npm run init-sv
+   ```
+
+
+Va trebuii sa porniti si baza de date din xampp zipul e pe server pe google drive.
