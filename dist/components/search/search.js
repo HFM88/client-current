@@ -1,33 +1,54 @@
 const searchInput = document.querySelector(".searchInput");
 const resultsContainer = document.querySelector(".resultsContainer");
 
+
+let resultIndex = -1;
 const addResult = (entryObject) => {
+  resultIndex++;
   if (entryObject.profilepic == "") {
     entryObject.profilepic = "http://localhost:5000/cdn/cat.png"
-  }else{
+  } else {
     entryObject.profilepic = "http://localhost:5000/cdn/" + entryObject.profilepic
   }
   const image = `<img src="${entryObject.profilepic}" class="object-cover w-full h-full">`;
 
   const friendButton = `
-         <button class="py-2 px-4 bg-accent rounded-md text-sm"> 
+         <button id=${"frbtn-" + resultIndex} class="py-2 px-4 bg-accent rounded-md text-sm z-[100] cursor-pointer"}> 
            Add friend
          </button>`;
   let profileStructure = `
-    <a class="w-full h-10 flex justify-between items-center gap-x-6 text-text" href="/profile">
-       <div class="flex items-center space-x-2">
+    <div class="w-full h-10 flex justify-between items-center gap-x-6 text-text" href="${"/profile?n=" + entryObject.username}">
+       <a class="flex items-center space-x-2" href="${"/profile?n=" + entryObject.username}">
          <span class="w-12 h-12 overflow-hidden rounded-full">${image}</span>
          <div class="flex flex-col">
-          <p class="font-medium text-md">${entryObject.username}</p>
-          <p class="text-text text-opacity-40 text-sm">${
-            entryObject.displayname
-          }</p>
+          <p class="font-medium text-md">${entryObject.displayname}</p>
+          <p class="text-text text-opacity-40 text-sm">${"@" + entryObject.username}</p>
          </div>
-       </div>
+       </a>
        ${entryObject.isFriends ? "" : friendButton}
-    </a>`;
+    </div>`;
 
   resultsContainer.insertAdjacentHTML("afterbegin", profileStructure);
+
+  document.getElementById("frbtn-" + resultIndex).addEventListener('click', async function () {
+    document.getElementById("frbtn-" + resultIndex).style.display = "none"
+    let res = await fetch('http://localhost:5000/api/friends/add', {
+      method: 'POST',
+      body: JSON.stringify({
+        targetUser: entryObject.username
+      }),
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    console.log(res);
+    if (res.ok) {
+      toastr.success("all good")
+    } else {
+      toastr.error("Erorr")
+    }
+  })
 };
 
 searchInput.addEventListener("input", async (e) => {
@@ -48,8 +69,9 @@ searchInput.addEventListener("input", async (e) => {
     resultsContainer.classList.replace("hidden", "flex");
     resultsContainer.innerHTML = "";
     if (filterResults.length !== 0) {
+      resultIndex = -1;
       filterResults.forEach(async (eachFilteredObject) => {
-        let resultIsFriend = await fetch('http://localhost:5000/api/user/get/' + eachFilteredObject.username , {
+        let resultIsFriend = await fetch('http://localhost:5000/api/user/get/' + eachFilteredObject.username, {
           credentials: 'include', // Include cookies in the request
         });
         resultIsFriend = await resultIsFriend.json();
@@ -66,3 +88,21 @@ searchInput.addEventListener("input", async (e) => {
     resultsContainer.classList.replace("flex", "hidden");
   }
 });
+
+toastr.options = {
+  "closeButton": false,
+  "debug": false,
+  "newestOnTop": false,
+  "progressBar": false,
+  "positionClass": "toast-bottom-right",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": "300",
+  "hideDuration": "1000",
+  "timeOut": "5000",
+  "extendedTimeOut": "1000",
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+}

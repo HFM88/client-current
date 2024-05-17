@@ -34,7 +34,7 @@
           } else {
             navuserprofileimg.setAttribute(
               "src",
-              "http://localhost:5000/cdn/cat.png"
+              "http://localhost:5000/cdn/" + data['profilepic']
             );
           }
         });

@@ -10,114 +10,46 @@
 
 <body class="bg-background font-paragraphs">
     <%-include ('components/navbar.ejs')%>
-    <div class="flex justify-center w-full mt-24 text-text px-10 font-headings text-lg">
-        <div class="flex basis-full md:basis-2/3 lg:basis-1/2 border-b border-spacing-40 border-b-text border-opacity-40">
-            <div class="basis-1/2 flex justify-center border-b border-spacing-40">
-                <span class="">For you</span>
-            </div>
-            <div class="basis-1/2 flex justify-center">
-                <span class="text-center">Friends</span>
+        <div class="flex justify-center w-full mt-20 text-text font-headings font-light text-md">
+            <div class="flex flex-col basis-full md:basis-2/3 lg:basis-1/2">
+                <div class="flex justify-between">
+                    <div class="basis-1/2 flex flex-col space-y-5 justify-center">
+                        <span class="text-center">For you</span>
+                        <div class="w-full h-[0.5px] bg-text mt-4"></div>
+                    </div>
+                    <div class="basis-1/2 flex flex-col space-y-5 justify-center">
+                        <span class="text-center">Friends</span>
+                        <div class="w-full h-[0.5px] bg-text bg-opacity-40 mt-4"></div>
+                    </div>
+                </div>
+         <!-- This acts as the border -->
             </div>
         </div>
-    </div>
-    
-    <div class="flex justify-center w-full mt-10 text-text px-10">
-        <div class="flex flex-col basis-full md:basis-2/3 lg:basis-1/2 justify-center space-y-4">
-            <!-- notificare -->
-            <div
-                class="flex flex-col sm:flex-row space-y-2 justify-between items-start md:items-center border-b border-b-text border-opacity-40 pb-2">
-                <!-- content notificare -->
-                <div class="flex items-center justify-between xs:justify-normal flex-wrap space-x-2">
-                    <!-- info notif -->
-                    <a class="py-2 flex justify-center items-center" href="/profile" id="user-profile">
-                        <div class="w-12 h-12 overflow-hidden rounded-full">
-                            <img src="https://www.alleycat.org/wp-content/uploads/2019/03/FELV-cat.jpg" alt=""
-                                class="object-cover w-full h-full" id="user-profile-pic">
-                        </div>
-                    </a>
-                    <div class="flex flex-col items-start flex-wrap">
-                        <div class="flex space-x-2" id="user-name">
-                            <span class="">BBCSucker123</span>
-                            <span class="text-text text-opacity-40">1h ago</span>
-                        </div>
-                        <div class="text-text text-opacity-40" id="notification-text">Vrea sa iti suga pula</div>
-                    </div>
-                </div>
-    
-                <div class="flex space-x-2 items-center">
-                    <!-- butoane de request -->
-                    <button class="px-4 py-2 bg-gray hover:bg-lightgray transition-all duration-300 rounded-md">
-                        Decline
-                    </button>
-                    <button class="px-4 py-2 bg-accent hover:bg-orange-600 transition-all duration-300 rounded-md">
-                        Accept
-                    </button>
-    
-                </div>
-            </div>
-    
-            <div
-                class="flex flex-col sm:flex-row space-y-2 justify-between items-start md:items-center border-b border-b-text border-opacity-40 pb-2">
-                <!-- content notificare -->
-                <div class="flex items-center justify-between xs:justify-normal flex-wrap space-x-2">
-                    <!-- info notif -->
-                    <a class="py-2 flex justify-center items-center" href="/profile" id="user-profile">
-                        <div class="w-12 h-12 overflow-hidden rounded-full">
-                            <img src="https://www.alleycat.org/wp-content/uploads/2019/03/FELV-cat.jpg" alt=""
-                                class="object-cover w-full h-full" id="user-profile-pic">
-                        </div>
-                    </a>
-                    <div class="flex flex-col items-start flex-wrap">
-                        <div class="flex space-x-2" id="user-name">
-                            <span class="">BBCSucker123</span>
-                            <span class="text-text text-opacity-40">1h ago</span>
-                        </div>
-                        <div class="text-text text-opacity-40" id="notification-text">Has sent you two messages</div>
-                    </div>
-                </div>
-    
-                <div class="flex space-x-2 items-center">
-                    <!-- butoane de request -->
-    
-                    <button class="px-4 py-2 bg-accent hover:bg-orange-600 transition-all duration-300 rounded-md">
-                        Messages
-                    </button>
-    
-                </div>
-            </div>
-    
-            <div
-                class="flex flex-col sm:flex-row space-y-2 justify-between items-start md:items-center border-b border-b-text border-opacity-40 pb-2">
-                <!-- content notificare -->
-                <div class="flex items-center justify-between xs:justify-normal flex-wrap space-x-2">
-                    <!-- info notif -->
-                    <a class="py-2 flex justify-center items-center" href="/profile" id="user-profile">
-                        <div class="w-12 h-12 overflow-hidden rounded-full">
-                            <img src="https://www.alleycat.org/wp-content/uploads/2019/03/FELV-cat.jpg" alt=""
-                                class="object-cover w-full h-full" id="user-profile-pic">
-                        </div>
-                    </a>
-                    <div class="flex flex-col items-start flex-wrap">
-                        <div class="flex space-x-2" id="user-name">
-                            <span class="">LifeInvader</span>
-                            <span class="text-text text-opacity-40">1h ago</span>
-                        </div>
-                        <div class="text-text text-opacity-40" id="notification-text">New changes to the app</div>
-                    </div>
-                </div>
-    
-                <div class="flex space-x-2 items-center">
-                    <!-- butoane de request -->
-                    <button class="px-4 py-2 bg-gray hover:bg-lightgray transition-all duration-300 rounded-md">
-                        Learn more
-                    </button>
-                </div>
-            </div>
-    
-        </div>
-    </div>
 
+        <div class="flex justify-center w-full mt-10 text-text">
+            <div class="flex flex-col basis-full md:basis-2/3 lg:basis-1/2 justify-center space-y-10 px-10">
+                <div class="flex flex-col space-y-2 bg-gray p-2 px-4 rounded-md">
+                    <div class="flex space-x-4 items-center justify-between">
+                        <a class="py-2 flex justify-center items-center" href="/profile" id="user-profile">
+                            <div class="w-12 h-12 overflow-hidden rounded-full">
+                                <img src="https://www.alleycat.org/wp-content/uploads/2019/03/FELV-cat.jpg" alt=""
+                                    class="object-cover w-full h-full" id="user-profile-pic">
+                            </div>
+                        </a>
+                        
+                        <input class="w-full h-full outline-none bg-gray items-center placeholder-text placeholder-opacity-40" placeholder="What are you up to?">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex justify-center w-full mt-10 mb-24 text-text">
+            <div class="flex flex-col basis-full md:basis-2/3 lg:basis-1/2 justify-center space-y-10 px-10" id="posts-container">
+                
+            </div>
+        </div>
+
+
+        <script src="../dist/components/home/renderposts.js"></script>
 </body>
-
-
 </html>

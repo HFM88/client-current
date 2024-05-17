@@ -18,11 +18,12 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 
 let profileid = urlParams.get("n");
-if(profileid == null && getCookie('username')){
-  profileid = getCookie('username');
-}else{
-  profileid = 'user';
+console.log(profileid)
+if (profileid == null) {
+  profileid = getCookie('username') || 'user';
 }
+
+console.log(profileid)
 
 const userFriendsCount = document.getElementById("user-friends")
 const userName = document.getElementById("user-name")
@@ -38,14 +39,16 @@ fetch(
     userDisplayName.innerText = data.displayname;
     userName.innerText = '@' + data.username;
 
-    if (data.profilepic == ""){
-      userProfilePic.setAttribute('src' , 'http://localhost:5000/cdn/cat.png')
-    }else{
-      userProfilePic.setAttribute('src', 'https://cdn.discordapp.com/attachments/1230500815131901952/1240193688735449110/IMG_1160.jpg?ex=6646fd61&is=6645abe1&hm=3333b0831b902e67e7c6a14ccc183e8a53e4f3d71e9d838ca90339e246aa33bd&')
+    console.log(data)
+
+    if (data.profilepic == "") {
+      userProfilePic.setAttribute('src', 'http://localhost:5000/cdn/cat.png')
+    } else {
+      userProfilePic.setAttribute('src', 'http://localhost:5000/cdn/' + data['profilepic'])
     }
-    
+
     if (data.feed) {
-     userBio.innerText = data.feed; 
+      userBio.innerText = data.feed;
     }
     else {
       userBio.innerText = "This hasnt set his bio yet."
