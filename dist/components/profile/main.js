@@ -31,15 +31,30 @@ const userDisplayName = document.getElementById("user-display-name")
 const userProfilePic = document.getElementById("user-profile-pic")
 const userBio = document.getElementById("user-bio")
 
+const primaryButton = document.getElementById("pf-btn-primary")
+const secondaryButton = document.getElementById("pf-btn-secondary")
+
 fetch(
   "http://localhost:5000/api/user/get/" + profileid || getCookie("username")
 ).then(function (res) {
   res.json().then(function (data) {
-    userFriendsCount.innerText = data.friendscount;
+    userFriendsCount.innerText = data.friendscount + ' prieteni';
     userDisplayName.innerText = data.displayname;
     userName.innerText = '@' + data.username;
 
     console.log(data)
+
+    if (data.username == getCookie('username')) {
+      secondaryButton.innerText = "My friends"
+      secondaryButton.setAttribute('href', '/notifications')
+
+      primaryButton.innerText = "Change display name"
+      document.getElementById('edit-profile-pic').addEventListener('click' , function(){
+        
+      })
+    } else {
+      document.getElementById('edit-profile-pic').remove();
+    }
 
     if (data.profilepic == "") {
       userProfilePic.setAttribute('src', 'http://localhost:5000/cdn/cat.png')

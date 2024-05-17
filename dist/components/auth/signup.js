@@ -23,6 +23,11 @@ signup_button.addEventListener('click', async function (e) {
         return;
     }
 
+    if (username_input.value.length <= 5 || username_input.value.length > 12) {
+        toastr.error("Username must be between 5 and 12 characters long");
+        return;
+    }
+
     if (password_input.value != repassword_input.value) {
         toastr.error("Passwords don't match");
         return;

@@ -26,6 +26,13 @@
 
     if (urlParams.get('u')) {
 
+        fetch('http://localhost:5000/api/user/get/' + urlParams.get('u')).then(async function (data) {
+            data = await data.json();
+            document.getElementById('friend-displayname').innerText = data.displayname;
+            document.getElementById('user-profile-pic').attributes.src.value = 'http://localhost:5000/cdn/' + data.profilepic;
+            document.getElementById('profile-button').attributes.href = "/profile/n=" + data.username
+        })
+
         try {
             var ws = new WebSocket('ws://localhost:5001');
             let interval

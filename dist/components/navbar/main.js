@@ -19,6 +19,29 @@
   const navuserprofile = document.getElementById("user-profile");
   const navuserprofileimg = navuserprofile.querySelector("img");
   const navusermessages = document.getElementById("user-messages");
+  const logoutbutton = document.getElementById("logout-button")
+
+  logoutbutton.addEventListener('click', async function (e) {
+    e.preventDefault();
+    const cookies = document.cookie.split(";");
+
+    await fetch('http://localhost:5000/api/user/logout', {
+      method: 'POST',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i];
+      const eqPos = cookie.indexOf("=");
+      const name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+      document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+
+    window.location.href = window.location.href;
+  })
 
   const usracctkn = getCookie("user_access_tkn");
   if (usracctkn) {
@@ -43,5 +66,6 @@
   } else {
     navuserprofile.style.display = "none";
     navusermessages.style.display = "none";
+    logoutbutton.style.display = "none"
   }
 }
